@@ -1,0 +1,3 @@
+configuration: {}
+network:
+  3000/tcp: Piazza HQ web interface (the wall display, the control app and the Family Hub)

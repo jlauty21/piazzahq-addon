@@ -1,0 +1,31 @@
+# Home Assistant add-on for Piazza HQ (works on Home Assistant OS and Home Assistant Supervised: both run the Supervisor).
+# The add-on runs the SAME container image that Docker users pull (ghcr.io/jlauty21/piazzahq), tagged with this version, so the add-on and the
+# Docker image can never drift apart. Update `version` to the newest STABLE release (scripts/set-version.sh does it) and the Supervisor offers the update.
+name: Piazza HQ
+version: "1.92.2"
+slug: piazzahq
+description: Family wall calendar, chores, photos and smart-home display for any screen with a browser
+url: https://piazzahq.com
+image: ghcr.io/jlauty21/piazzahq
+# The image is built for these two (see .github/workflows/docker-publish.yml in the app repo). No 32-bit Raspberry Pi OS builds.
+arch:
+  - aarch64
+  - amd64
+startup: application
+boot: auto
+# Piazza HQ keeps everything (database, photos, settings) in /data, which the Supervisor stores for the add-on, includes in Home Assistant backups
+# and keeps across updates. Nothing to map.
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: Piazza HQ web interface (the wall display, the control app and the Family Hub)
+# The "Open Web UI" button. /app is the control app; the wall display is the same address without /app.
+webui: "http://[HOST]:[PORT:3000]/app"
+# The Supervisor restarts the add-on if this stops answering (the same public liveness URL the Docker image uses for its health check).
+watchdog: "http://[HOST]:[PORT:3000]/api/settings"
+# No ingress for now: Piazza HQ's pages use absolute paths (/app, /api/...), which do not work behind Home Assistant's /api/hassio_ingress/<token>/ prefix.
+ingress: false
+# `stage: experimental` until it has been run on real Home Assistant OS and Supervised installs.
+stage: experimental
+options: {}
+schema: {}
