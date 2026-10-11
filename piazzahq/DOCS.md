@@ -30,7 +30,8 @@ Update it like any add-on: when a new Piazza HQ release is out, Home Assistant s
 
 ## Good to know
 
-- **Supported hardware:** 64-bit installs only (Home Assistant OS or Supervised on amd64 or aarch64, including a Raspberry Pi 4 or 5 with the 64-bit image). 32-bit Raspberry Pi installs are not supported.
+- **Supported hardware:** 64-bit installs only: Home Assistant OS or Supervised on amd64 or aarch64. That includes a **Raspberry Pi 3, 4 or 5 running the 64-bit Home Assistant OS image** (on a Pi 3, choose the "Raspberry Pi 3 (64-bit)" image). Home Assistant's older 32-bit images are not supported; reinstall with the 64-bit image and restore your Home Assistant backup.
+- **A Raspberry Pi 3 has only 1 GB of memory,** and Home Assistant itself uses a good share of it, so it works but is tight. A Pi 4 with 2 GB or more is more comfortable.
 - **Port 3000** is open to your home network. Set an **App PIN** in Piazza HQ (Settings → Security) so that only your family can change things. The wall display itself is always visible to anyone on your network.
 - **Home Assistant Container or Core installs** have no add-ons. Use the Docker image instead: https://piazzahq.com/guide.
 - **No sidebar panel.** Piazza HQ's pages do not work behind Home Assistant's ingress address, so it opens in its own tab through **Open Web UI**.

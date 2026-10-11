@@ -4,7 +4,7 @@
 
 **[Piazza HQ](https://piazzahq.com)** is a free family wall calendar for any screen with a browser: calendars, weather, photos, chores, to-dos, shopping, and smart-home widgets that show what Home Assistant knows.
 
-This repository holds the Home Assistant **add-on**, for **Home Assistant OS** and **Home Assistant Supervised** (the two installs that have an add-on store, on 64-bit `amd64` or `aarch64`, including a Raspberry Pi 4 or 5). On Home Assistant Container or Core, use the [Docker image](https://piazzahq.com/guide) instead; it is the same software.
+This repository holds the Home Assistant **add-on**, for **Home Assistant OS** and **Home Assistant Supervised** (the two installs that have an add-on store, on 64-bit `amd64` or `aarch64`, including a Raspberry Pi 3, 4 or 5 running the 64-bit Home Assistant OS image; a Pi 3 has only 1 GB of memory, so it is tight). On Home Assistant Container or Core, use the [Docker image](https://piazzahq.com/guide) instead; it is the same software.
 
 ## Install
 
