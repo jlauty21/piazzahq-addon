@@ -2,7 +2,7 @@
 # The add-on runs the SAME container image that Docker users pull (ghcr.io/jlauty21/piazzahq), tagged with this version, so the add-on and the
 # Docker image can never drift apart. Update `version` to the newest STABLE release (scripts/set-version.sh does it) and the Supervisor offers the update.
 name: Piazza HQ
-version: "1.92.2"
+version: "1.92.3"
 slug: piazzahq
 description: Family wall calendar, chores, photos and smart-home display for any screen with a browser
 url: https://piazzahq.com
