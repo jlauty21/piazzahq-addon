@@ -1,6 +1,9 @@
 # Home Assistant add-on for Piazza HQ (works on Home Assistant OS and Home Assistant Supervised: both run the Supervisor).
 # The add-on runs the SAME container image that Docker users pull (ghcr.io/jlauty21/piazzahq), tagged with this version, so the add-on and the
 # Docker image can never drift apart. Update `version` to the newest STABLE release (scripts/set-version.sh does it) and the Supervisor offers the update.
+# Left out on purpose because the Supervisor's defaults are what we want (the linter asks for it): startup: application, boot: auto, ingress: false
+# (no ingress: Piazza HQ's pages use absolute paths such as /app and /api/..., which do not work behind Home Assistant's /api/hassio_ingress/<token>/ prefix),
+# and no options or schema (there is nothing to configure here).
 name: Piazza HQ
 version: "1.92.3"
 slug: piazzahq
@@ -11,8 +14,6 @@ image: ghcr.io/jlauty21/piazzahq
 arch:
   - aarch64
   - amd64
-startup: application
-boot: auto
 # Piazza HQ keeps everything (database, photos, settings) in /data, which the Supervisor stores for the add-on, includes in Home Assistant backups
 # and keeps across updates. Nothing to map.
 ports:
@@ -21,11 +22,6 @@ ports_description:
   3000/tcp: Piazza HQ web interface (the wall display, the control app and the Family Hub)
 # The "Open Web UI" button. /app is the control app; the wall display is the same address without /app.
 webui: "http://[HOST]:[PORT:3000]/app"
-# The Supervisor restarts the add-on if this stops answering (the same public liveness URL the Docker image uses for its health check).
-watchdog: "http://[HOST]:[PORT:3000]/api/settings"
-# No ingress for now: Piazza HQ's pages use absolute paths (/app, /api/...), which do not work behind Home Assistant's /api/hassio_ingress/<token>/ prefix.
-ingress: false
+# Health: the image has its own Docker HEALTHCHECK (the public /api/settings liveness URL). With the add-on's Watchdog switched on, the Supervisor restarts it when it is unhealthy.
 # `stage: experimental` until it has been run on real Home Assistant OS and Supervised installs.
 stage: experimental
-options: {}
-schema: {}
